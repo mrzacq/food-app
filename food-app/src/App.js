@@ -29,6 +29,12 @@ export default class App extends Component {
       console.log(err)
     })
   }
+
+  addToFavor(event, id){
+    event.preventDefault()
+    console.log(id, 'ini data favorit')
+  }
+
   render() {
     const { collections } = this.state
     return (
@@ -37,7 +43,7 @@ export default class App extends Component {
         <div>
           <Container fluid>
             <Row>
-              <ListCategories collections={collections}/>
+              <ListCategories collections={collections} addToFavor={this.addToFavor}/>
             </Row>
           </Container>
         </div>
