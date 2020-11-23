@@ -4,6 +4,7 @@ import ListCategories from "./components/ListCategories";
 import { Container, Row } from "react-bootstrap";
 import API_URL from './utils/constant'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export default class App extends Component {
   constructor(props) {
@@ -33,6 +34,12 @@ export default class App extends Component {
   addToFavor(event, id){
     event.preventDefault()
     console.log(id, 'ini data favorit')
+    Swal.fire({
+      icon: "success",
+      title: "Success add to favorite",
+      timer: 3000,
+      showConfirmButton: false
+    })
   }
 
   render() {
