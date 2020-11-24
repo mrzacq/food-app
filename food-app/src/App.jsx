@@ -1,32 +1,24 @@
-import React, { useState, useEffect } from "react";
-import NavbarComponent from "./components/NavbarComponents";
-import ListCategories from "./components/ListCategories";
-import { Container, Row } from "react-bootstrap";
+import React from "react";
+import Navigation from "./components/Navigation";
+import CollectionList from "./components/CollectionList";
+import Footer from "./components/Footer"
+import useFetch from './helper/useFetch'
+import { Container } from "react-bootstrap";
 import API_URL from "./utils/constant";
 import Swal from "sweetalert2";
-require("dotenv").config();
 
 export default function App(props) {
-  const [collections, setCollections] = useState([]);
-
-  useEffect(() => {
-    console.log("componentdidmount");
-    fetch(API_URL + "?city_id=10", {
+  const [collections, loading] = useFetch(
+    API_URL + "collections?city_id=" + (Math.floor(Math.random() * 50) + 1),
+    {
       headers: {
         "user-key": process.env.REACT_APP_USER_KEY,
         "content-type": "application/json",
       },
-    })
-      .then((response) => {
-        if (response.status === 200) return response.json();
-      })
-      .then((data) => {
-        setCollections(data.collections);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+    }
+  )
+
+  if(loading) return <h1>Loading....</h1>
 
   const addToFavor = (event, id, title) => {
     event.preventDefault();
@@ -40,14 +32,13 @@ export default function App(props) {
 
   return (
     <div className="App">
-      <NavbarComponent></NavbarComponent>
+      <Navigation></Navigation>
       <div>
         <Container fluid>
-          <Row>
-            <ListCategories collections={collections} addToFavor={addToFavor} />
-          </Row>
+            <CollectionList collections={collections} addToFavor={addToFavor} />
         </Container>
       </div>
+      <Footer></Footer>
     </div>
   );
 }
