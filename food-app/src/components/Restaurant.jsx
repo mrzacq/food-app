@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
 
-const CollectionList = (props) => {
+const Restaurant = (props) => {
   const dispatch = useDispatch();
 
   const { restaurants, loading } = props;
@@ -41,6 +41,7 @@ const CollectionList = (props) => {
             >
               <Card.Img variant="top" src={el.restaurant.featured_image} />
               <Card.Body>
+                <Card.Title><b>ID:</b> {el.restaurant.id}</Card.Title>
                 <Card.Title>{el.restaurant.name}</Card.Title>
                 <Card.Text>Review: {el.restaurant.all_reviews_count}</Card.Text>
                 <Button
@@ -65,4 +66,4 @@ const CollectionList = (props) => {
   );
 };
 
-export default CollectionList;
+export default Restaurant;

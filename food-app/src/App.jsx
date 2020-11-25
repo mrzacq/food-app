@@ -24,7 +24,7 @@ export default function App(props) {
     <Provider store={store}>
       <Router>
         <div className="App" style={{ backgroundImage: "https://www.singleplatform.com/wp-content/uploads/2018/12/5-Tips-for-Improving-Restaurant-Ambiance.jpg", backgroundPosition: 'center', backgroundSize: 'cover'}}>
-          <Navigation></Navigation>
+          <Navigation restaurants={restaurants}></Navigation>
           <div>
             <Switch>
               <Route exact path="/">
