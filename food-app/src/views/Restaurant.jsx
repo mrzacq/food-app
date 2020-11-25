@@ -3,11 +3,17 @@ import { Card, Button, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import Swal from "sweetalert2";
+import useFetch from "../helper/useFetch";
+import API_URL from "../utils/constant";
 
 const Restaurant = (props) => {
+  const [restaurants, loading] = useFetch(API_URL + "search", {
+    headers: {
+      "user-key": process.env.REACT_APP_USER_KEY,
+      "content-type": "application/json",
+    },
+  });
   const dispatch = useDispatch();
-
-  const { restaurants, loading } = props;
 
   const history = useHistory();
 
