@@ -1,9 +1,15 @@
 import React from "react";
 import { Card, Button, Container, Row } from "react-bootstrap";
-import detail from "../helper/detail";
+import { useHistory } from 'react-router-dom'
 
 const CollectionList = (props) => {
   const { collections, addToFavor } = props;
+
+  const history = useHistory()
+
+  function toDetail(id) {
+    history.push(`/detail/${id}`)
+  }
 
   return (
     <Container>
@@ -34,16 +40,7 @@ const CollectionList = (props) => {
                 </Button>
                 <Button
                   variant="success"
-                  onClick={(event) =>
-                    detail(
-                      event,
-                      el.collection.collection_id,
-                      el.collection.title,
-                      el.collection.description,
-                      el.collection.image_url
-                    )
-                  }
-                >
+                  onClick={() => toDetail(el.collection.collection_id)}>
                   Detail
                 </Button>
               </Card.Body>

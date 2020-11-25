@@ -12,7 +12,7 @@ function useFetch(url, headers) {
         if (response.status === 200) return response.json();
       })
       .then((data) => {
-        console.log(data);
+        // console.log(data);
         setCollections(data.collections);
       })
       .catch((err) => {
