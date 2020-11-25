@@ -28,7 +28,7 @@ function Detail(props) {
                   <Card.Title>ID: {el.collection_id}</Card.Title>
                   <Card.Title>{el.title}</Card.Title>
                   <Card.Text>{el.description}</Card.Text>
-                  <Card.Text><a href={el.description}>Website</a></Card.Text>
+                  <Card.Text><a href={el.url}>Website</a></Card.Text>
                 </Card.Body>
               </Card>
             );
