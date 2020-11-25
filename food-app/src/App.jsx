@@ -1,6 +1,6 @@
 import React from "react";
 import Navigation from "./components/Navigation";
-import CollectionList from "./components/CollectionList";
+import Restaurant from "./components/Restaurant";
 import Favorite from "./components/Favorite"
 import Detail from "./components/Detail"
 import Footer from "./components/Footer";
@@ -11,8 +11,8 @@ import Swal from "sweetalert2";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 export default function App(props) {
-  const [collections, loading] = useFetch(
-    API_URL + "collections?city_id=1",
+  const [restaurants, loading] = useFetch(
+    API_URL + "search",
     {
       headers: {
         "user-key": process.env.REACT_APP_USER_KEY,
@@ -41,8 +41,8 @@ export default function App(props) {
           <Switch>
             <Route exact path="/">
               <Container fluid>
-                <CollectionList
-                  collections={collections}
+                <Restaurant
+                  restaurants={restaurants}
                   addToFavor={addToFavor}
                 />
               </Container>
@@ -50,8 +50,8 @@ export default function App(props) {
             <Route path="/favorite">
               <Favorite></Favorite>
             </Route>
-            <Route path="/detail/:collection_id">
-              <Detail collections={collections}></Detail>
+            <Route path="/detail/:id">
+              <Detail></Detail>
             </Route>
           </Switch>
         </div>

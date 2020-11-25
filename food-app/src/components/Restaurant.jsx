@@ -3,7 +3,7 @@ import { Card, Button, Container, Row } from "react-bootstrap";
 import { useHistory } from 'react-router-dom'
 
 const CollectionList = (props) => {
-  const { collections, addToFavor } = props;
+  const { restaurants, addToFavor } = props;
 
   const history = useHistory()
 
@@ -13,26 +13,27 @@ const CollectionList = (props) => {
 
   return (
     <Container>
-      <h2 className="text-center mt-3 mb-3">List Collection</h2>
+      <h2 className="text-center mt-3 mb-3">List Restaurant</h2>
       <Row className="mt-3 mb-3">
-        {collections.map((el) => {
+        {restaurants.map((el) => {
           return (
             <Card
-              key={el.collection.collection_id}
+              key={el.restaurant.id}
               style={{ width: "18rem" }}
               className="mx-auto my-2"
             >
-              <Card.Img variant="top" src={el.collection.image_url} />
+              <Card.Img variant="top" src={el.restaurant.featured_image} />
               <Card.Body>
-                <Card.Title>{el.collection.title}</Card.Title>
+                <Card.Title>{el.restaurant.name}</Card.Title>
+                <Card.Text>Review: {el.restaurant.all_reviews_count}</Card.Text>
                 <Button
                   className="mr-3"
                   variant="primary"
                   onClick={(event) =>
                     addToFavor(
                       event,
-                      el.collection.collection_id,
-                      el.collection.title
+                      el.restaurant.id,
+                      el.restaurant.name
                     )
                   }
                 >
@@ -40,7 +41,7 @@ const CollectionList = (props) => {
                 </Button>
                 <Button
                   variant="success"
-                  onClick={() => toDetail(el.collection.collection_id)}>
+                  onClick={() => toDetail(el.restaurant.id)}>
                   Detail
                 </Button>
               </Card.Body>

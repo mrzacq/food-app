@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 
 function useFetch(url, headers) {
-  const [collections, setCollections] = useState([]);
+  const [restaurants, setCollections] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    console.log("componentdidmount");
     setLoading(true);
     fetch(url, headers)
       .then((response) => {
@@ -13,7 +12,7 @@ function useFetch(url, headers) {
       })
       .then((data) => {
         // console.log(data);
-        setCollections(data.collections);
+        setCollections(data.restaurants);
       })
       .catch((err) => {
         console.log(err);
@@ -23,7 +22,7 @@ function useFetch(url, headers) {
       });
   }, []);
 
-  return [collections, loading]
+  return [restaurants, loading]
 }
 
 export default useFetch;
