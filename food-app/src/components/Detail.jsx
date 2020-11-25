@@ -9,7 +9,6 @@ function Detail(props) {
   const [loading, setLoading] = useState(false)
   
   useEffect(() => {
-    console.log("componentdetail")
     setLoading(true)
     fetch(API_URL + `search`, {
       headers: {
@@ -32,7 +31,7 @@ function Detail(props) {
     })
   }, [id])
 
-  if (loading) return <h1>Loading....</h1>;
+  if (loading) return <h1 className="text-center mt-5">Loading....</h1>;
 
   const restaurant = []
   for(let i = 0; i < detail.length; i++){
@@ -41,7 +40,6 @@ function Detail(props) {
       restaurant.push(obj)
     }
   }
-  console.log(restaurant, 'ini restorannya')
 
   return (
     <Container className="mt-4">

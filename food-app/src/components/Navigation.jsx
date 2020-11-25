@@ -16,8 +16,8 @@ const Navigation = () => {
             </Nav>
             <Form inline>
               <FormControl
-                type="number"
-                placeholder="Search city by ID"
+                type="text"
+                placeholder="Search restaurant..."
                 className="mr-sm-2"
               />
               <Button variant="outline-success">Search</Button>

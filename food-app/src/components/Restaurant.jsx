@@ -1,16 +1,33 @@
 import React from "react";
 import { Card, Button, Container, Row } from "react-bootstrap";
-import { useHistory } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
 const CollectionList = (props) => {
-  const { restaurants, addToFavor } = props;
+  const dispatch = useDispatch();
 
-  const history = useHistory()
+  const { restaurants, loading } = props;
 
+  const history = useHistory();
+
+  function addToFavor(restaurant) {
+    Swal.fire({
+      icon: "success",
+      title: `Success add "${restaurant.name}" to favorite`,
+      timer: 3000,
+      showConfirmButton: false,
+    });
+    dispatch({
+      type: "ADD_TO_FAVOR",
+      payload: { restaurant },
+    });
+  }
   function toDetail(id) {
-    history.push(`/detail/${id}`)
+    history.push(`/detail/${id}`);
   }
 
+  if (loading) return <h1 className="text-center mt-5">Loading....</h1>;
   return (
     <Container>
       <h2 className="text-center mt-3 mb-3">List Restaurant</h2>
@@ -29,19 +46,14 @@ const CollectionList = (props) => {
                 <Button
                   className="mr-3"
                   variant="primary"
-                  onClick={(event) =>
-                    addToFavor(
-                      event,
-                      el.restaurant.id,
-                      el.restaurant.name
-                    )
-                  }
+                  onClick={() => addToFavor(el.restaurant)}
                 >
                   Add to Favorite
                 </Button>
                 <Button
                   variant="success"
-                  onClick={() => toDetail(el.restaurant.id)}>
+                  onClick={() => toDetail(el.restaurant.id)}
+                >
                   Detail
                 </Button>
               </Card.Body>
