@@ -15,7 +15,7 @@ function Favorite() {
               style={{ width: "20rem" }}
               className="mx-auto my-2"
             >
-              <Card.Img variant="top" src={el.featured_image} alt={el.restaurant.name}/>
+              <Card.Img variant="top" src={el.featured_image} alt={el.name}/>
               <Card.Body>
                 <Card.Title>
                   <b>ID:</b> {el.id}

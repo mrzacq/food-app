@@ -12,7 +12,7 @@ function Detail(props) {
   const dispatch = useDispatch()
   useEffect(() => {
     dispatch(fetchDetail());
-  }, [id]);
+  }, [dispatch]);
 
   if (loading) return <h1 className="text-center mt-5">Loading....</h1>;
   if (error) return <h1 className="text-center mt-5">Error....</h1>;
