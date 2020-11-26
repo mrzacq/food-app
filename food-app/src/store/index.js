@@ -1,35 +1,15 @@
-import { createStore } from "redux";
-import Swal from 'sweetalert2'
-const initialState = {
-  favorites: [],
-};
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+import thunk from "redux-thunk";
 
-function reducer(state = initialState, action) {
-  switch (action.type) {
-    case "ADD_TO_FAVOR":
-      let newFavor = state.favorites.concat(action.payload.restaurant);
-      var hasDupsSimple = function (newFavor) {
-        return newFavor.some(function (value) {
-          return newFavor.indexOf(value) !== newFavor.lastIndexOf(value); 
-        });
-      };
-      if(hasDupsSimple(newFavor)){
-        Swal.fire({
-          icon: "error",
-          title: "Restaurant already exists in your favorites",
-          timer: 3000,
-          showConfirmButton: false
-        })
-        newFavor.pop()
-      }
-      else {
-        return { ...state, favorites: newFavor };
-      }
-    default:
-      return state;
-  }
-}
+import detailReducer from './reducers/detailReducer'
+import favorReducer from './reducers/favorReducer'
+import restaurantReducer from './reducers/restaurantreducer'
 
-const store = createStore(reducer);
+const reducer = combineReducers({
+  detailReducer, favorReducer, restaurantReducer
+})
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 
 export default store;

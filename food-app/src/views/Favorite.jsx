@@ -3,19 +3,19 @@ import { useSelector } from "react-redux";
 import { Card, Container, Row } from "react-bootstrap";
 
 function Favorite() {
-  const state = useSelector((state) => state);
+  const favorites = useSelector((state) => state.favorReducer.favorites);
   return (
     <Container className="mt-4">
       <h2 className="text-center mt-3 mb-3">Favorite Restaurant</h2>
       <Row className="mt-3 mb-3">
-        {state.favorites.map((el) => {
+        {favorites.map((el) => {
           return (
             <Card
               key={el.id}
               style={{ width: "20rem" }}
               className="mx-auto my-2"
             >
-              <Card.Img variant="top" src={el.featured_image} />
+              <Card.Img variant="top" src={el.featured_image} alt={el.restaurant.name}/>
               <Card.Body>
                 <Card.Title>
                   <b>ID:</b> {el.id}

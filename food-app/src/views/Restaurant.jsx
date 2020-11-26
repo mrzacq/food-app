@@ -1,21 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Card, Button, Container, Row } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Swal from "sweetalert2";
-import useFetch from "../helper/useFetch";
-import API_URL from "../utils/constant";
+import fetchRestaurants from '../store/actions/fetchRestaurant'
+import setFavor from '../store/actions/favor'
 
 const Restaurant = (props) => {
-  const [restaurants, loading] = useFetch(API_URL + "search", {
-    headers: {
-      "user-key": process.env.REACT_APP_USER_KEY,
-      "content-type": "application/json",
-    },
-  });
+  const restaurants = useSelector(state => state.restaurantReducer.restaurants)
+  const loading = useSelector(state => state.restaurantReducer.loading)
+  const error = useSelector(state => state.restaurantReducer.error)
   const dispatch = useDispatch();
-
   const history = useHistory();
+
+  useEffect(() => {
+    dispatch(fetchRestaurants())
+  }, [dispatch])
 
   function addToFavor(restaurant) {
     Swal.fire({
@@ -24,16 +24,15 @@ const Restaurant = (props) => {
       timer: 3000,
       showConfirmButton: false,
     });
-    dispatch({
-      type: "ADD_TO_FAVOR",
-      payload: { restaurant },
-    });
+    dispatch(setFavor(restaurant));
   }
+  
   function toDetail(id) {
     history.push(`/detail/${id}`);
   }
 
   if (loading) return <h1 className="text-center mt-5">Loading....</h1>;
+  if (error) return <h1 className="text-center mt-5">Error....</h1>;
   return (
     <Container>
       <h2 className="text-center mt-3 mb-3">List Restaurant</h2>
@@ -45,7 +44,7 @@ const Restaurant = (props) => {
               style={{ width: "18rem" }}
               className="mx-auto my-2"
             >
-              <Card.Img variant="top" src={el.restaurant.featured_image} />
+              <Card.Img variant="top" src={el.restaurant.featured_image} alt={el.restaurant.name} />
               <Card.Body>
                 <Card.Title><b>ID:</b> {el.restaurant.id}</Card.Title>
                 <Card.Title>{el.restaurant.name}</Card.Title>

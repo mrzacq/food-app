@@ -6,13 +6,10 @@ import Restaurant from "./views/Restaurant";
 import Favorite from "./views/Favorite";
 import Detail from "./views/Detail";
 import Footer from "./components/Footer";
-import useFetch from "./helper/useFetch";
 import { Container } from "react-bootstrap";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-
 export default function App(props) {
-
   return (
     <Provider store={store}>
       <Router>
