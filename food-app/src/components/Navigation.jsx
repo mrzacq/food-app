@@ -1,5 +1,5 @@
 import React from "react";
-import { Navbar, Nav, Container, Form, FormControl, Button } from "react-bootstrap";
+import { Navbar, Nav, Container } from "react-bootstrap";
 import { Link } from "react-router-dom"
 const Navigation = () => {
   return (
@@ -14,14 +14,6 @@ const Navigation = () => {
             <Nav className="mr-auto">
               <Nav><Link to="/favorite" style={{color: "white"}}>Favorite</Link></Nav>
             </Nav>
-            <Form inline>
-              <FormControl
-                type="text"
-                placeholder="Search restaurant..."
-                className="mr-sm-2"
-              />
-              <Button variant="outline-success">Search</Button>
-            </Form>
           </Navbar.Collapse>
         </Container>
       </Navbar>
